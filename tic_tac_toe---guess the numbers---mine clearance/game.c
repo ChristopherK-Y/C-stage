@@ -89,14 +89,14 @@ void PlayerGo(char ChessBoard[][COL], int row, int col) {
 }
 char Judge(char ChessBoard[][COL], int row, int col) {
 	int null = 0;
-	for (int i = 0; i < row; i++) {//ÐÐÉÏ3Á¬
+	for (int i = 0; i < row; i++) {//ï¿½ï¿½ï¿½ï¿½3ï¿½ï¿½
 		if (ChessBoard[i][0] == ChessBoard[i][1] &&\
 			ChessBoard[i][1] == ChessBoard[i][2] &&\
 			ChessBoard[i][0] != ' ') {
 			return ChessBoard[i][0];
 		}
 	}
-	for (int i = 0; i < col; i++) {//ÁÐÉÏ3Á¬
+	for (int i = 0; i < col; i++) {//ï¿½ï¿½ï¿½ï¿½3ï¿½ï¿½
 		if (ChessBoard[0][i] == ChessBoard[1][i] &&\
 			ChessBoard[1][i] == ChessBoard[2][i] &&\
 			ChessBoard[0][i] != ' ') {
@@ -105,12 +105,12 @@ char Judge(char ChessBoard[][COL], int row, int col) {
 	}
 	if (ChessBoard[0][0] == ChessBoard[1][1] &&\
 		ChessBoard[1][1] == ChessBoard[2][2] &&\
-		ChessBoard[0][0] != ' ') {//¶Ô½ÇÏß1
+		ChessBoard[0][0] != ' ') {//ï¿½Ô½ï¿½ï¿½ï¿½1
 		return ChessBoard[0][0];
 	}
 	if (ChessBoard[0][2] == ChessBoard[1][1] &&\
 		ChessBoard[1][1] == ChessBoard[2][0] &&\
-		ChessBoard[0][2] != ' ') {//¶Ô½ÇÏß2
+		ChessBoard[0][2] != ' ') {//ï¿½Ô½ï¿½ï¿½ï¿½2
 		return ChessBoard[0][2];
 	}
 
@@ -122,9 +122,9 @@ char Judge(char ChessBoard[][COL], int row, int col) {
 		}
 	}
 	if (null) {
-		return 'N';//¼ÌÐøÓÎÏ·£¬¼ÌÐøÊäÈë
+		return 'N';//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	}
-	return 'P';//Æ½¾Ö
+	return 'P';//Æ½ï¿½ï¿½
 }
 void ComputerGO(char ChessBoard[][COL], int row, int col) {
 	
@@ -149,14 +149,14 @@ int PorC() {
 	char p[10];
 	int _p;
 	int _c;
-	char stone[10] = "Ê¯Í·";
-	char scissors[10] = "¼ôµ¶";
-	char cloth[10] = "²¼";
+	char stone[10] = "çŸ³å¤´";
+	char scissors[10] = "ï¿½ï¿½ï¿½ï¿½";
+	char cloth[10] = "ï¿½ï¿½";
 
 START:
 	_c = rand() % 3;
 	while (1) {
-		printf("Please enter Ê¯Í· or ¼ôµ¶ or ²¼# ");
+		printf("Please enter Ê¯Í· or ï¿½ï¿½ï¿½ï¿½ or ï¿½ï¿½# ");
 		scanf("%s", &p);
 		if (!(strcmp(stone, p))) {
 			_p = 0;
@@ -198,7 +198,7 @@ void GameChess() {
 		//ShowBoard(ChessBoard, ROW, COL);
 		if (who) {
 			printf("Because you win,so you go !\n");
-			PlayerGo(ChessBoard, ROW, COL);//Èç¹ûwho=1£¬Íæ¼ÒÏÈ×ß£¬·ñÔò»úÆ÷×ß
+			PlayerGo(ChessBoard, ROW, COL);//ï¿½ï¿½ï¿½who=1ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			ShowBoard(ChessBoard, ROW, COL);
 		}
 		else {
@@ -207,7 +207,7 @@ void GameChess() {
 			ShowBoard(ChessBoard, ROW, COL);
 		}
 		//ShowBoard(ChessBoard, ROW, COL);
-		win = Judge(ChessBoard, ROW, COL);//reurn 'X' Player win; return 'O' Computer win; return 'P' Æ½¾Ö; return 'N' ¼ÌÐø
+		win = Judge(ChessBoard, ROW, COL);//reurn 'X' Player win; return 'O' Computer win; return 'P' Æ½ï¿½ï¿½; return 'N' ï¿½ï¿½ï¿½ï¿½
 		if (win != 'N') {
 			switch (win) {
 			case'X':
@@ -224,7 +224,7 @@ void GameChess() {
 			}
 			return;
 		}
-		if (who) {//Èç¹ûwho=1£¬ËµÃ÷Íæ¼ÒÏÈ×ß£¬ËùÒÔÏÖÔÚ»úÆ÷×ß
+		if (who) {//ï¿½ï¿½ï¿½who=1ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú»ï¿½ï¿½ï¿½ï¿½ï¿½
 			ComputerGO(ChessBoard, ROW, COL);
 			ShowBoard(ChessBoard, ROW, COL);
 		}
