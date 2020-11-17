@@ -52,7 +52,7 @@ s 只包含小写英文字母。
 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
 */
 
-#include"public.h"
+#include"public.h"//头文件
 
 
 /**
@@ -61,12 +61,12 @@ s 只包含小写英文字母。
 * 参数：char*源字符串指针
 */
 char* sortString(char* s) {
-	char count[26] = { 0 };
+	int count[26] = { 0 };
 	char* ptr = s;
-	int len = strlen(s);
-	char result[500];
+	char* result = (char*)malloc(sizeof(char) * 501);//此处注意还有一个'\0'多占用1个
+	memset(result, '\0', 501);
 	char* tailPtr = result;
-	int wordsCount;
+	int wordsCount = 0;
 	while (*ptr) {
 		count[*ptr++ - 'a']++;
 	}
@@ -88,24 +88,15 @@ char* sortString(char* s) {
 		for (int i = 0; i < 26; i++) {
 			wordsCount += count[i];
 		}
-		if (wordsCount == 0) {
-			*tailPtr = '\0';
+		if (!wordsCount) {
 			break;
 		}
 	}
 	return result;
 }
 
-int main() {
+int main() {//测试块
 	char sss[] = "aabbcc";
-	char* ssss = sortString(sss);
-	char* s = sss;
-	int i = 0;
-	printf("%c", ssss[1]);
-	printf("%c", ssss[2]);
-	while (ssss[i]) {
-		
-		printf("%c", ssss[i++]);
-	}
+	printf("%s",sortString(sss));
 	return 0;
 }
