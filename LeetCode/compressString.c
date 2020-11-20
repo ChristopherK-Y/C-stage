@@ -22,13 +22,14 @@
 
 #include"public.h"
 
+//############################################################     方法1：暴力求解     #######################################################################################
+
 
 /**
-* 功能：利用字符重复出现的次数，编写一种方法，实现基本的字符串压缩功能
-* 返回值：字符串指针
-* 参数：字符串指针
+* 功能：计算一个传入数字的位数
+* 返回值：int
+* 参数：int
 */
-
 int nums(int count) {
 	int result = 0;
 	while (count) {
@@ -38,7 +39,12 @@ int nums(int count) {
 	return result;
 }
 
-char* compressString(char* S) {
+/**
+* 功能：利用字符重复出现的次数，编写一种方法，实现基本的字符串压缩功能
+* 返回值：字符串指针
+* 参数：字符串指针
+*/
+char* compressString_mine(char* S) {
 	char* ptr = S;
 	char* target = (char*)malloc(sizeof(char)*100000);
 	memset(target, '\0', 100000);
@@ -58,12 +64,12 @@ char* compressString(char* S) {
 			else {
 				*tail++ = S[i];
 				number = nums(count);
+				tail = tail + number - 1;
 				while(count){
-					*(tail + number - 1) = (count % 10) + '0';
+					*tail-- = (count % 10) + '0';
 					count /= 10;
-					tail--;
 				}
-				tail += number;
+				tail += number + 1;
 				count = 1;
 			}
 		}
@@ -75,8 +81,35 @@ char* compressString(char* S) {
 	return S;
 }
 
-int main() {
-	char a[] = "rrrrrLLLLLPPPPPPRRRRRgggNNNNNVVVVVVVVVVDDDDDDDDDDIIIIIIIIIIlllllllAAAAqqqqqqqbbbNNNNffffff";
-	printf("%s", compressString(a));
-	return 0;
+//############################################################     方法2：进阶方法     #######################################################################################
+char* compressString_others(char* S) {
+	int size = strlen(S);
+	if (size <= 2) return S;
+	char* str = (char*)malloc(sizeof(char) * (2 * size));
+	str[0] = S[0];
+	int count = 1, index = 1;
+	for (int i = 1; i < size + 1; i++) {
+		if (S[i] == S[i - 1]) {
+			count++;
+		}
+		else {
+			int num = (int)log10(count) + index;
+			index = num;
+			while (count) {
+				str[num--] = count % 10 + '0';
+				count /= 10;
+			}
+			str[++index] = S[i];
+			count = 1;
+			++index;
+		}
+	}
+	if (index >= size + 1) return S;
+	return str;
 }
+/*
+作者：PonderYao
+链接：https ://leetcode-cn.com/problems/compress-string-lcci/solution/cyu-yan-yi-dong-jie-fa-4msde-9211yu-61mde-100-by-b/
+来源：力扣（LeetCode）
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+*/
