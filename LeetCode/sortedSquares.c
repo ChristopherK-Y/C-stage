@@ -33,7 +33,7 @@ int compare(const void* xp, const void* yp) {
 	int x = *(int*)xp;
 	int y = *(int*)yp;
 
-	if (x > y) {
+	/*if (x > y) {
 		return 1;
 	}
 	else if (x < y) {
@@ -41,7 +41,8 @@ int compare(const void* xp, const void* yp) {
 	}
 	else {
 		return 0;
-	}
+	}*/
+	return x - y;//可以使用一个return就可以把上面的三分支就搞定，很简单就可以看的懂，不解释
 
 }
 
