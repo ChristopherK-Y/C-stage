@@ -44,7 +44,7 @@ void quickSort(int* nums, int left, int right) {
 			}
 		}
 		nums[l] = x;
-		quickSort(nums, left, l-1);
+		quickSort(nums, left, l-1); 
 		quickSort(nums, l+1, right);
 	}
 }
