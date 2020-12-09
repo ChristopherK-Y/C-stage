@@ -6,7 +6,7 @@
 #include<string.h>
 #include<stdlib.h>
 
-#define CORRECT_ID "Bit"
+#define CORRECT_ID "Bit" 
 #define CORRECT_PASSWARD "Bits"
 #define OPPORTUNITY 3
 
