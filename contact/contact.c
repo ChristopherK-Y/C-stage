@@ -73,12 +73,8 @@ void add(contact_t* ct) {//Ìí¼ÓÈË
 void del(contact_t* ct) {//É¾³ý
 	int index = findIndex(ct);
 	if (index != -1) {
+		ct->people[index] = ct->people[ct->currentPeople - 1];
 		ct->currentPeople--;
-		strcpy(ct->people[index].name, ct->people[ct->currentPeople - 1].name);
-		ct->people[index].sex = ct->people[ct->currentPeople - 1].sex;
-		ct->people[index].age = ct->people[ct->currentPeople - 1].age;
-		strcpy(ct->people[index].phoneNumber, ct->people[ct->currentPeople - 1].phoneNumber);
-		strcpy(ct->people[index].address, ct->people[ct->currentPeople - 1].address);
 		printf("Delete successful!\n");
 		return;
 	}
