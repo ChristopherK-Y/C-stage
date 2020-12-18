@@ -35,40 +35,37 @@
 * 参数：二级指针，原字符串数组的指针，字符串的个数，字母表字符串的指针
 * 
 * 思路：
-* 围绕hash表的理念来解，将chars生成一个hash表，一共26个int空间对应26个字母，不出现的为0，出现的为1，重复则++
-* 重点：hash表要保留着让所有word都能用来查找，因此创建一个同等大小的count计数数组
-* 遍历单个word过程中，长度超过chars长度的直接跳过；
-* 判断字符在hash表中是否出现（hash值不为0），如果出现重复，判断count值是否超过hash，超过说明该字母在chars中的重复个数不足
-* 如果判断没问题，count值+1；如果循环中无break，max加上该word的长度
-* 一轮word遍历后，下一轮word遍历前，count必须置零！
+* 见注释^-^
 */
 int countCharacters(char** words, int wordsSize, char* chars) {
-	int len = strlen(chars);
-	if (len == 0 || wordsSize == 0) {//任何一方为0就是0
+	int	charsLen = strlen(chars);
+	if (charsLen == 0 || wordsSize == 0) {//如果单词表或者字母表任意一个为0，那么就直接返回0
 		return 0;
 	}
-	int map[26], count[26];
-	memset(map, 0, sizeof(int) * 26);
-	for (int i = 0; i < len; i++) {//统计字母表中每个字母的频率
-		map[chars[i] - 'a']++;
+	int map[26], count[26];//定义2个数组，用于统计字母表和每个单词的字母频率
+	memset(map, 0, sizeof(int) * 26);//首先对字母表统计数组清零
+	for (int i = 0; i < charsLen; i++) {
+		map[chars[i] - 'a']++;//统计字母表中每种字母的频率
 	}
-	int j = 0;
-	int max = 0;
+	
+	int j = 0, max = 0;//j为单词的长度循环遍历，见58行，max为被拼写的单词的总长度
 	for (int i = 0; i < wordsSize; i++) {
-		int wordLen = strlen(words[i]);
-		if (wordLen > len) {
-			continue;
+		int len = strlen(words[i]);
+		if (len > charsLen) {//如果单词的长度比字母表的长度还长，说明这个单词一定无法拼写
+			continue;//直接跳过该单词
 		}
-		memset(count, 0, sizeof(int) * 26);
-		for (j = 0; j < wordLen; j++) {
-			count[words[i][j] - 'a']++;
-			if (map[words[i][j] - 'a'] < count[words[i][j] - 'a']) {
-				break;
+		memset(count, 0, sizeof(int) * 26);//对单词频率计数数组清零
+		for (j = 0; j < len; j++) {
+			count[words[i][j] - 'a']++;//统计该单词每个字母的频率
+			if (map[words[i][j]-'a'] < count[words[i][j] - 'a']) {
+				break;//如果出现任何一个单词的频率比字母表中的频率还高，说明一定无法拼写
 			}
 		}
-		if (j == wordLen) {
-			max += wordLen;
+		if (len == j) {
+			max += len;//如果未执行break，说明该单词可以被拼写，就把该单词的长度加到max中
 		}
 	}
-	return max;
+	return max;//返回max，被拼写的单词的总长度
 }
+
+
