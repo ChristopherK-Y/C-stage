@@ -16,7 +16,7 @@ void mainMenu() {//主菜单显示
 
 }
 
-static void initAttribute(contact_t* ct, int* currentPeople, int* capacity) {
+static void initAttribute(contact_t* ct, int* currentPeople, int* capacity) {//初始化属性函数（现在的人数/总容量）
 	FILE* attribute = fopen("contact_attribute.txt", "r");
 	if (attribute == NULL) {
 		printf("Read file error at attribute!\n");
@@ -26,7 +26,7 @@ static void initAttribute(contact_t* ct, int* currentPeople, int* capacity) {
 	fclose(attribute);
 }
 
-static void initData(contact_t* ct) {
+static void initData(contact_t* ct) {//初始化数据函数（姓名性别等等基础数据）
 	FILE* data = fopen("contact_data.txt", "r");
 	if (data == NULL) {
 		printf("Read file error at data!\n");
@@ -39,7 +39,7 @@ static void initData(contact_t* ct) {
 	fclose(data);
 }
 
-static void writeAttribute(contact_t* ct) {
+static void writeAttribute(contact_t* ct) {//写入属性函数
 	FILE* attribute = fopen("contact_attribute.txt", "w");
 	if (attribute == NULL) {
 		printf("Write file error at attribute!\n");
@@ -49,7 +49,7 @@ static void writeAttribute(contact_t* ct) {
 	fclose(attribute);
 }
 
-static void writeData(contact_t* ct) {
+static void writeData(contact_t* ct) {//写入数据函数
 	FILE* data = fopen("contact_data.txt", "w");
 	if (data == NULL) {
 		printf("Write file error at data!\n");
@@ -82,7 +82,7 @@ static bool isExistence(contact_t* ct) {//该人是否存在（根据手机号）
 	return false;
 }
 
-static bool isFull(contact_t* ct) {
+static bool isFull(contact_t* ct) {//判断现在的人数是否满了
 	assert(ct);
 	if (ct->capacity == ct->currentPeople) {
 		printf("The contact is full!\nExtending...\n");
@@ -91,7 +91,7 @@ static bool isFull(contact_t* ct) {
 	return false;
 }
 
-static bool extend(contact_t** ct) {
+static bool extend(contact_t** ct) {//如果满了，扩容函数
 	assert(ct);
 	contact_t* new = (contact_t*)realloc(*ct, sizeof(contact_t) + sizeof(person_t) * ((*ct)->currentPeople + INC_NUM));
 	if (NULL == new) {
@@ -104,7 +104,7 @@ static bool extend(contact_t** ct) {
 	return true;
 }
 
-void initContact(contact_t** ct) {
+void initContact(contact_t** ct) {//初始化通讯录函数
 	int capacity = 0;
 	int currentPeople = 0;
 	initAttribute(*ct, &currentPeople, &capacity);
@@ -234,7 +234,7 @@ void sort(contact_t* ct) {//排序
 	printf("Sort successful!\n");
 }
 
-void writeFile(contact_t* ct) {
+void writeFile(contact_t* ct) {//写入文件函数，当文件退出的时候
 	writeAttribute(ct);
 	writeData(ct);
 }
