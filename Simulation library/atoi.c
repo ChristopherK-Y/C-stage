@@ -1,4 +1,4 @@
-int my_atoi(const char* str) {
+int my_atoi(const char* str) { 
     long result = 0;//结果，使用long类型防止越界
     int sign = 1;//符号位，默认正数
     const char* ptr = str;
