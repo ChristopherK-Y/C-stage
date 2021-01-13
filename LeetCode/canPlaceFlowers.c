@@ -80,7 +80,7 @@ bool canPlaceFlowers_mine(int* flowerbed, int flowerbedSize, int n) {
 
 /**
 * 功能：给定一个花坛和一个数n，能否在不打破种植规则的情况下种入n朵花
-* 返回值：bool
+* 返回值：bool 
 * 参数：整形flowerbed数组，数组的元素个数flowerbedSize，可以种下的花n朵花吗？
 * 
 * 思路：
